@@ -11,3 +11,25 @@
   border-radius: 6px;
   background: white; */
 }
+
+.center {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.center-items-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+  background-color: white;
+  text-align: center;
+}
+
+.center-items {
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+  background-color: white;
+  text-align: center;
+}

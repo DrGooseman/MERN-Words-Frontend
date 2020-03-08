@@ -16,19 +16,17 @@ import { useAuth } from "./hooks/auth-hook";
 import "./App.css";
 
 function App() {
-  const { token, login, logout, userId } = useAuth();
+  const { token, login, logout, _id, name } = useAuth();
 
   let routes;
 
-  if (true) {
+  if (token) {
     routes = (
       <Switch>
         <Route path="/" exact>
           <Dashboard />
         </Route>
-        <Route path="/login" exact>
-          <Login />
-        </Route>
+
         <Redirect to="/" />
       </Switch>
     );
@@ -45,7 +43,7 @@ function App() {
 
   return (
     <AuthContext.Provider
-      value={{ isLoggedIn: !!token, token, userId, login, logout }}
+      value={{ isLoggedIn: !!token, token, _id, login, logout, name }}
     >
       <Router>
         <Header />

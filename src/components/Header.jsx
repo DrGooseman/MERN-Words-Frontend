@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { NavLink } from "react-router-dom";
@@ -7,7 +7,11 @@ import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
+import { AuthContext } from "../auth-context";
+
 function Header() {
+  const auth = useContext(AuthContext);
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Brand as={NavLink} to={"/"}>
@@ -23,11 +27,13 @@ function Header() {
         </Nav>
 
         <Nav>
-          <Nav.Link as={NavLink} to={"/login"}>
-            Login/Register
-          </Nav.Link>
-          <Navbar.Brand>James Quinn</Navbar.Brand>
-          <Nav.Link to={"/"}>Logout</Nav.Link>
+          {!auth.token && (
+            <Nav.Link as={NavLink} to={"/login"}>
+              Login/Register
+            </Nav.Link>
+          )}
+          {auth.token && <Navbar.Brand>{auth.name}</Navbar.Brand>}
+          {auth.token && <Nav.Link onClick={auth.logout}>Logout</Nav.Link>}
         </Nav>
       </Navbar.Collapse>
     </Navbar>
