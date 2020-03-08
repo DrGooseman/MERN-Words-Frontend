@@ -14,6 +14,7 @@ import { AuthContext } from "./auth-context";
 import { useAuth } from "./hooks/auth-hook";
 
 import "./App.css";
+import WordList from "./pages/WordList";
 
 function App() {
   const { token, login, logout, _id, name } = useAuth();
@@ -26,7 +27,9 @@ function App() {
         <Route path="/" exact>
           <Dashboard />
         </Route>
-
+        <Route path="/wordlist" exact>
+          <WordList />
+        </Route>
         <Redirect to="/" />
       </Switch>
     );

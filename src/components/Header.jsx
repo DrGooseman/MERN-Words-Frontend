@@ -23,7 +23,9 @@ function Header() {
           <Nav.Link as={NavLink} to={"/"}>
             Dashboard
           </Nav.Link>
-          <Nav.Link to={"/"}>Words List</Nav.Link>
+          <Nav.Link as={NavLink} to={"/wordlist"}>
+            Words List
+          </Nav.Link>
         </Nav>
 
         <Nav>
