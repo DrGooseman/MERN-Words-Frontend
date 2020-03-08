@@ -5,12 +5,13 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 
+import WordColumn from "./../components/WordColumn";
+
 import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
 
 import { useHttpClient } from "../hooks/http-hook";
 import { AuthContext } from "../auth-context";
-import WordColumn from "./../components/WordColumn";
 
 function WordList() {
   const auth = useContext(AuthContext);
