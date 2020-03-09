@@ -25,6 +25,19 @@
   margin: 0 auto;
   text-align: center;
 }
+.center2 {
+  /* width: 100%;
+  height: 100%; */
+  /* top: 50%;
+ 
+  left: 50%; */
+  /* display: flex;
+  align-items: center; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .center-items-flex {
   display: flex;
@@ -57,4 +70,60 @@
 .dashboard-item {
   margin: 1rem 1rem;
   max-width: 40rem;
+}
+
+div.card-body {
+  padding: 0;
+}
+
+.answered-message {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 38rem;
+  /* height: 20rem; */
+}
+
+.learn-card {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 38rem;
+  /* height: 20rem; */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  background: white;
+}
+
+.learn-Progress {
+  margin: 18px 14px;
+
+  width: 3rem;
+  height: 3rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  background: white;
+}
+
+.learn-card-body {
+  /* margin: auto auto; */
+  padding: 0;
+  width: 100%;
+  display: flex;
+  /* justify-content: space-between;
+  align-content: space-around; */
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+
+  /* width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto auto; */
+
+  padding: 0;
+}
+
+.learn-card button {
+  min-width: 16rem;
+  height: 6rem;
+  margin: 1rem;
 }

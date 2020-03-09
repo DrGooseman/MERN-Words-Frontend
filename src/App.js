@@ -13,8 +13,10 @@ import Dashboard from "./pages/Dashboard";
 import { AuthContext } from "./auth-context";
 import { useAuth } from "./hooks/auth-hook";
 
-import "./App.css";
 import WordList from "./pages/WordList";
+import Learn from "./pages/Learn";
+
+import "./App.css";
 
 function App() {
   const { token, login, logout, _id, name } = useAuth();
@@ -29,6 +31,9 @@ function App() {
         </Route>
         <Route path="/wordlist" exact>
           <WordList />
+        </Route>
+        <Route path="/learn" exact>
+          <Learn />
         </Route>
         <Redirect to="/" />
       </Switch>

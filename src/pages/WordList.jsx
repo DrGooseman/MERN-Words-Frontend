@@ -39,14 +39,6 @@ function WordList() {
     } catch (err) {}
   }
 
-  function getReviewDays(date) {
-    if (new Date(date) < new Date()) return "Ready to review!";
-
-    let time = (new Date(date) - new Date()) / 1000 / 60 / 60;
-    if (time < 24) console.log(Math.ceil(time) + " hours");
-    else console.log(Math.ceil(time) + " days");
-  }
-
   return (
     <React.Fragment>
       {error && (
@@ -67,7 +59,7 @@ function WordList() {
             <tr>
               <th>#</th>
               <th>Word</th>
-              <th>Definition</th>
+              <th>Translation</th>
               <th>Level</th>
               <th>Next Review</th>
             </tr>
@@ -80,7 +72,7 @@ function WordList() {
                 word={word.word}
                 definition={word.definition}
                 level={word.level}
-                nextDate={getReviewDays(word.nextDate)}
+                nextDate={word.nextDate}
               />
             ))}
           </tbody>

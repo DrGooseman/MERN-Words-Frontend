@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-
+import { useHistory } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
@@ -16,6 +16,7 @@ import Card from "../components/Card";
 function Dashboard() {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const history = useHistory();
 
   const [wordInfo, setWordInfo] = useState({
     readyToLearn: 0,
@@ -70,15 +71,24 @@ function Dashboard() {
           key={2}
         />
       </ProgressBar>
-      <div className="dashboard-items ">
-        <Card header={"Ready to learn"} bodyTitle={wordInfo.readyToLearn} />
-        <Card header={"Ready for review"} bodyTitle={wordInfo.readyToReview} />
-        <Card header={"Words Learned"} bodyTitle={wordInfo.learned} />
-        <Card header={"Words Mastered"} bodyTitle={wordInfo.readyToReview} />
-      </div>
-      <div className="dashboard-items ">
-        <Button size="lg">Learn new words!</Button>
-      </div>
+      {!isLoading && (
+        <div className="dashboard-items ">
+          <Card header={"Ready to learn"} bodyTitle={wordInfo.readyToLearn} />
+          <Card
+            header={"Ready for review"}
+            bodyTitle={wordInfo.readyToReview}
+          />
+          <Card header={"Words Learned"} bodyTitle={wordInfo.learned} />
+          <Card header={"Words Mastered"} bodyTitle={wordInfo.readyToReview} />
+        </div>
+      )}
+      {!isLoading && (
+        <div className="dashboard-items ">
+          <Button size="lg" onClick={() => history.push("/learn")}>
+            Learn new words!
+          </Button>
+        </div>
+      )}
       <div className="center-container-list"></div>
       {isLoading && (
         <div className="center-items-flex">

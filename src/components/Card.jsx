@@ -5,9 +5,13 @@ function Card(props) {
   return (
     <BCard className="dashboard-item">
       <BCard.Header>{props.header}</BCard.Header>
-      <BCard.Body>
-        <BCard.Title>{props.bodyTitle}</BCard.Title>
-      </BCard.Body>
+      {props.bodyTitle !== undefined && (
+        <BCard.Body>
+          <BCard.Title className="center">
+            <h3>{props.bodyTitle}</h3>
+          </BCard.Title>
+        </BCard.Body>
+      )}
     </BCard>
   );
 }
