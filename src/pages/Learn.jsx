@@ -238,6 +238,7 @@ function Learn() {
           options={currentOptions}
           definition={currentWord.definition}
           handleAnswer={handleAnswer}
+          isAnswered={answerState !== 0}
         />
         // </div>
       )}

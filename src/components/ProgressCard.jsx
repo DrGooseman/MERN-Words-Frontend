@@ -19,7 +19,7 @@ function ProgressCard(props) {
     if (props.wins === 3)
       return (
         <div className="center2">
-          <i className="fas fa-check fa-2x"></i>
+          <i className="fas fa-check fa-2x" style={{ color: "green" }}></i>
         </div>
       );
   }
