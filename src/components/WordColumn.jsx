@@ -7,7 +7,7 @@ function WordColumn(props) {
 
     let time = (new Date(date) - new Date()) / 1000 / 60 / 60;
     if (time < 24) return Math.ceil(time) + " hours";
-    else return Math.ceil(time) + " days";
+    else return Math.ceil(time) / 24 + " days";
   }
 
   return (

@@ -79,7 +79,7 @@ function Dashboard() {
             bodyTitle={wordInfo.readyToReview}
           />
           <Card header={"Words Learned"} bodyTitle={wordInfo.learned} />
-          <Card header={"Words Mastered"} bodyTitle={wordInfo.readyToReview} />
+          <Card header={"Words Mastered"} bodyTitle={wordInfo.mastered} />
         </div>
       )}
       {!isLoading && (

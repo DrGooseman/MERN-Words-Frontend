@@ -25,6 +25,7 @@ function Learn() {
   const [currentOptions, setCurrentOptions] = useState();
   const [isDone, setIsDone] = useState(false);
   const [answerState, setAnswerState] = useState(0);
+  const [isSentence, setIsSentence] = useState(false);
   //const [wordLevels, setWords] = useState([]);
 
   useEffect(() => {
@@ -33,7 +34,6 @@ function Learn() {
 
   useEffect(() => {
     if (words.length > 0 && !answerState) {
-      console.log("useEffect 1");
       getQuestion();
     }
   }, [words]);
@@ -52,6 +52,7 @@ function Learn() {
       const newWords = responseData.words.map(word => ({ ...word, wins: 0 }));
 
       setWords(newWords);
+      console.log(newWords);
       // getQuestion();
     } catch (err) {}
   }
@@ -59,6 +60,10 @@ function Learn() {
   function getQuestion() {
     const options = [];
     const rightOption = getNextWord();
+
+    if (rightOption.wins > 0 && rightOption.sentence) setIsSentence(true);
+    else setIsSentence(false);
+
     rightOption.isCorrect = true;
     options.push(rightOption);
     fillRandomOptions(options);
@@ -235,10 +240,13 @@ function Learn() {
         // <div className="learn-card">
         <LearnCard
           word={currentWord.word}
+          sentence={currentWord.sentence}
+          translatedSentence={currentWord.translatedSentence}
           options={currentOptions}
           definition={currentWord.definition}
           handleAnswer={handleAnswer}
           isAnswered={answerState !== 0}
+          isSentence={isSentence}
         />
         // </div>
       )}

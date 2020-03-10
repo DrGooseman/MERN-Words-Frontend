@@ -93,6 +93,10 @@ div.card-body {
   background: white;
 }
 
+.learn-card p {
+  margin: 0;
+}
+
 .learn-Progress {
   margin: 18px 14px;
 
