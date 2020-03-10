@@ -6,8 +6,8 @@ function WordColumn(props) {
       return <p style={{ color: "green" }}>Ready to review!</p>;
 
     let time = (new Date(date) - new Date()) / 1000 / 60 / 60;
-    if (time < 24) return Math.ceil(time) + " hours";
-    else return Math.ceil(time) / 24 + " days";
+    if (time < 24) return Math.ceil(time) + " hour" + (time <= 1 ? "" : "s");
+    else return Math.ceil(time / 24) + " day" + (time <= 24 ? "" : "s");
   }
 
   return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BCard from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -6,6 +6,9 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 
 function LearnCard(props) {
+  //array that shows which button is clicked
+  const [isClicked, setIsClicked] = useState([false, false, false, false]);
+
   function getHeader() {
     return <h1>{props.word}</h1>;
   }
@@ -14,12 +17,10 @@ function LearnCard(props) {
     const slice = props.sentence.match(
       new RegExp(` ${props.word}[ !.,]`, "i")
     )[0];
-    console.log(slice);
+
     const splits = props.sentence.split(
       new RegExp(` ${props.word}[ !.,]`, "i")
     );
-    console.log(props.sentence);
-    console.log(splits[0] + "." + splits[1]);
 
     const splitMatch = slice.split(props.word);
 
@@ -36,11 +37,24 @@ function LearnCard(props) {
     );
   }
 
-  function getColor(isCorrect) {
+  function getColor(optionNum) {
     if (!props.isAnswered) return "primary";
-    else if (isCorrect) return "outline-success";
-    else return "outline-danger";
+    let mod = !isClicked[optionNum] ? "outline-" : "";
+    if (props.options[optionNum].isCorrect) return mod + "success";
+    else return mod + "danger";
   }
+
+  useEffect(() => {
+    setIsClicked([false, false, false, false]);
+  }, [props.word]);
+
+  function handleClick(optionNum) {
+    const newIsClicked = [...isClicked];
+    newIsClicked[optionNum] = true;
+    setIsClicked(newIsClicked);
+    props.handleAnswer(props.options[optionNum]);
+  }
+
   if (props.isSentence) {
     return (
       <BCard className="learn-card">
@@ -52,26 +66,30 @@ function LearnCard(props) {
         <BCard.Body>
           <BCard.Title className="learn-card-body">
             <Button
-              onClick={() => props.handleAnswer(props.options[0])}
-              variant={getColor(props.options[0].isCorrect)}
+              onClick={() => handleClick(0)}
+              variant={getColor(0)}
+              disabled={props.isAnswered && !isClicked[0]}
             >
               <h3>{props.options[0].word}</h3>
             </Button>
             <Button
-              onClick={() => props.handleAnswer(props.options[1])}
-              variant={getColor(props.options[1].isCorrect)}
+              onClick={() => handleClick(1)}
+              variant={getColor(1)}
+              disabled={props.isAnswered && !isClicked[1]}
             >
               <h3>{props.options[1].word}</h3>
             </Button>
             <Button
-              onClick={() => props.handleAnswer(props.options[2])}
-              variant={getColor(props.options[2].isCorrect)}
+              onClick={() => handleClick(2)}
+              variant={getColor(2)}
+              disabled={props.isAnswered && !isClicked[2]}
             >
               <h3>{props.options[2].word}</h3>
             </Button>
             <Button
-              onClick={() => props.handleAnswer(props.options[3])}
-              variant={getColor(props.options[3].isCorrect)}
+              onClick={() => handleClick(3)}
+              variant={getColor(3)}
+              disabled={props.isAnswered && !isClicked[3]}
             >
               <h3>{props.options[3].word}</h3>
             </Button>
@@ -87,26 +105,30 @@ function LearnCard(props) {
         <BCard.Body>
           <BCard.Title className="learn-card-body">
             <Button
-              onClick={() => props.handleAnswer(props.options[0])}
-              variant={getColor(props.options[0].isCorrect)}
+              onClick={() => handleClick(0)}
+              variant={getColor(0)}
+              disabled={props.isAnswered && !isClicked[0]}
             >
               <h3>{props.options[0].definition}</h3>
             </Button>
             <Button
-              onClick={() => props.handleAnswer(props.options[1])}
-              variant={getColor(props.options[1].isCorrect)}
+              onClick={() => handleClick(1)}
+              variant={getColor(1)}
+              disabled={props.isAnswered && !isClicked[1]}
             >
               <h3>{props.options[1].definition}</h3>
             </Button>
             <Button
-              onClick={() => props.handleAnswer(props.options[2])}
-              variant={getColor(props.options[2].isCorrect)}
+              onClick={() => handleClick(2)}
+              variant={getColor(2)}
+              disabled={props.isAnswered && !isClicked[2]}
             >
               <h3>{props.options[2].definition}</h3>
             </Button>
             <Button
-              onClick={() => props.handleAnswer(props.options[3])}
-              variant={getColor(props.options[3].isCorrect)}
+              onClick={() => handleClick(3)}
+              variant={getColor(3)}
+              disabled={props.isAnswered && !isClicked[3]}
             >
               <h3>{props.options[3].definition}</h3>
             </Button>

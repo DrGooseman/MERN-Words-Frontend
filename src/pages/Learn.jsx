@@ -16,6 +16,10 @@ import { AuthContext } from "../auth-context";
 import ProgressCard from "../components/ProgressCard";
 import LearnCard from "../components/LearnCard";
 
+const soundCorrect = new Audio("/SoundCorrect.wav");
+const soundIncorrect = new Audio("SoundIncorrect.wav");
+const soundWin = new Audio("SoundWin.wav");
+
 function Learn() {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -52,7 +56,6 @@ function Learn() {
       const newWords = responseData.words.map(word => ({ ...word, wins: 0 }));
 
       setWords(newWords);
-      console.log(newWords);
       // getQuestion();
     } catch (err) {}
   }
@@ -139,10 +142,12 @@ function Learn() {
             if (word.level > 4) word.level = 4;
             updateWord(word);
           }
+          playSound(0);
         }
         return word;
       });
     } else {
+      playSound(1);
       newWords = words.map(word => {
         if (word.number === currentWord.number) {
           word.wins = 0;
@@ -171,6 +176,7 @@ function Learn() {
 
   function finishRound() {
     setIsDone(true);
+    playSound(2);
   }
 
   async function updateWord(word) {
@@ -186,6 +192,16 @@ function Learn() {
       );
       console.log(responseData.word);
     } catch (err) {}
+  }
+
+  function playSound(soundNum) {
+    // if (audio.isPlaying())
+    if (soundNum === 0) soundCorrect.play();
+    else if (soundNum === 1) soundIncorrect.play();
+    else if (soundNum === 2) {
+      soundCorrect.pause();
+      soundWin.play();
+    }
   }
 
   return (
