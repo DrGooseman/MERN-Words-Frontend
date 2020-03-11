@@ -22,7 +22,7 @@ function LearnCard(props) {
       new RegExp(` ${props.word}[ !.,]`, "i")
     );
 
-    const splitMatch = slice.split(props.word);
+    const splitMatch = slice.split(new RegExp(`${props.word}`, "i"));
 
     const keyWord = props.isAnswered ? props.word : "____";
 

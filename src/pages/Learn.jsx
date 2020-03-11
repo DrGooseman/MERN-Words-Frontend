@@ -20,7 +20,7 @@ const soundCorrect = new Audio("/SoundCorrect.wav");
 const soundIncorrect = new Audio("SoundIncorrect.wav");
 const soundWin = new Audio("SoundWin.wav");
 
-function Learn() {
+function Learn(props) {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
@@ -45,7 +45,9 @@ function Learn() {
   async function getData() {
     try {
       const responseData = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + "/users/words/8",
+        process.env.REACT_APP_BACKEND_URL +
+          "/users/words/8&" +
+          props.match.params.Category,
         "GET",
         null,
         {
@@ -56,6 +58,7 @@ function Learn() {
       const newWords = responseData.words.map(word => ({ ...word, wins: 0 }));
 
       setWords(newWords);
+
       // getQuestion();
     } catch (err) {}
   }
@@ -109,6 +112,7 @@ function Learn() {
 
       if (!array.some(word => word.number === randomWord.number)) {
         randomWord.isCorrect = false;
+
         array.push(randomWord);
         if (array.length === 4) return;
       }
@@ -190,7 +194,6 @@ function Learn() {
           Authorization: auth.token
         }
       );
-      console.log(responseData.word);
     } catch (err) {}
   }
 

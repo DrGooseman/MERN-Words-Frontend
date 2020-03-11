@@ -84,8 +84,30 @@ function Dashboard() {
       )}
       {!isLoading && (
         <div className="dashboard-items ">
-          <Button size="lg" onClick={() => history.push("/learn")}>
-            Learn new words!
+          <Button
+            className="dashboard-learn-button"
+            onClick={() => history.push("/learn/Top")}
+          >
+            Top 1000 Words
+          </Button>
+          <Button
+            className="dashboard-learn-button"
+            onClick={() => history.push("/learn/Food")}
+          >
+            Food
+          </Button>
+          <Button
+            className="dashboard-learn-button-small-text"
+            onClick={() => history.push("/learn/Useful")}
+          >
+            Useful Words and Phrases
+          </Button>
+
+          <Button
+            className="dashboard-learn-button-small-text"
+            onClick={() => history.push("/learn/Curse")}
+          >
+            Curse Words and Insults
           </Button>
         </div>
       )}

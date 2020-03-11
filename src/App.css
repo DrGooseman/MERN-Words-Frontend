@@ -16,9 +16,30 @@
   margin: 0 auto;
   width: 100%;
   max-width: 33rem;
-  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  border-radius: 6px;
-  background: white; */
+}
+
+.center-container-list-buttons {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 33rem;
+
+  padding: 0;
+  width: 100%;
+  display: flex;
+
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: auto;
+
+  padding: 0;
+}
+
+.center-container-list-buttons button {
+  width: 32%;
+  /* height: 6rem; */
+  /* margin: 0.2rem; */
+  /* font-size: 0.8rem !important; */
+  margin: auto;
 }
 
 .center {
@@ -58,13 +79,29 @@
 
 .dashboard-items {
   list-style: none;
-  margin: 1rem auto;
+  margin: 0.4rem auto;
   padding: 0;
   width: 100%;
+  max-width: 50rem;
   /* max-width: 100rem; */
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.dashboard-learn-button,
+.dashboard-learn-button-small-text {
+  margin: 1.4rem 2rem;
+
+  width: 12rem;
+  height: 6rem;
+  font-size: 2rem !important;
+  line-height: 2.4rem !important;
+}
+
+.dashboard-learn-button-small-text {
+  font-size: 1.7rem !important;
+  line-height: 2.2rem !important;
 }
 
 .dashboard-item {
@@ -98,7 +135,7 @@ div.card-body {
 }
 
 .learn-Progress {
-  margin: 18px 14px;
+  margin: 6px 14px;
 
   width: 3rem;
   height: 3rem;
@@ -130,4 +167,27 @@ div.card-body {
   min-width: 16rem;
   height: 6rem;
   margin: 1rem;
+}
+
+@media (min-width: 684px) {
+  .dashboard-items {
+    list-style: none;
+    margin: 1rem auto;
+    padding: 0;
+    width: 100%;
+    max-width: 50rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .learn-Progress {
+    margin: 12px 14px;
+
+    width: 3rem;
+    height: 3rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    border-radius: 6px;
+    background: white;
+  }
 }

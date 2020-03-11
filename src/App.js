@@ -32,9 +32,7 @@ function App() {
         <Route path="/wordlist" exact>
           <WordList />
         </Route>
-        <Route path="/learn" exact>
-          <Learn />
-        </Route>
+        <Route path="/learn/:Category" exact component={Learn}></Route>
         <Redirect to="/" />
       </Switch>
     );
