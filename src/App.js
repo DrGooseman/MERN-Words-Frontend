@@ -17,6 +17,7 @@ import WordList from "./pages/WordList";
 import Learn from "./pages/Learn";
 
 import "./App.css";
+import WordInfo from "./pages/WordInfo";
 
 function App() {
   const { token, login, logout, _id, name } = useAuth();
@@ -33,6 +34,7 @@ function App() {
           <WordList />
         </Route>
         <Route path="/learn/:Category" exact component={Learn}></Route>
+        <Route path="/word/:WordNum" exact component={WordInfo}></Route>
         <Redirect to="/" />
       </Switch>
     );

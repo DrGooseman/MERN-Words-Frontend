@@ -24,14 +24,14 @@
   max-width: 33rem;
 
   padding: 0;
-  width: 100%;
+  /* width: 100%;
   display: flex;
 
   justify-content: center;
   flex-wrap: wrap;
   margin: auto;
 
-  padding: 0;
+  padding: 0; */
 }
 
 .center-container-list-buttons button {
@@ -161,6 +161,60 @@ div.card-body {
   grid-template-columns: auto auto; */
 
   padding: 0;
+}
+
+.word-info {
+  font-size: 3rem;
+  display: inline;
+  margin: 0 auto;
+  /* width: 100% */
+
+  max-width: 38rem;
+  /* height: 20rem; */
+  width: fit-content;
+  min-width: 12rem !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  border-radius: 6px;
+  background: white;
+}
+
+.word-info-body {
+  font-size: 2rem !important;
+  text-align: center;
+  color: grey;
+}
+
+.word-info-sentence {
+  margin: 1.2rem auto;
+  width: 100%;
+  max-width: 38rem;
+}
+.word-info-sentence h4 {
+  font-size: 2rem;
+  color: #444444;
+}
+.word-info-sentence p {
+  font-size: 1.3rem;
+  color: grey;
+}
+.word-info-level {
+  width: 7rem;
+  height: 6rem;
+  text-align: center;
+  margin: 1rem;
+}
+
+.word-info-level-body {
+  display: flex;
+  /* justify-content: space-between;
+  align-content: space-around; */
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.word-info-level-body-item {
+  /* height: 2rem; */
+  margin: 0.2rem 0.3rem;
 }
 
 .learn-card button {

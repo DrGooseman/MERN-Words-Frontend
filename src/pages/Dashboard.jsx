@@ -61,12 +61,12 @@ function Dashboard() {
       <ProgressBar>
         <ProgressBar
           striped
-          variant="success"
+          variant="warning"
           now={getPercentage(wordInfo.mastered)}
           key={1}
         />
         <ProgressBar
-          variant="warning"
+          variant="success"
           now={getPercentage(wordInfo.learned)}
           key={2}
         />

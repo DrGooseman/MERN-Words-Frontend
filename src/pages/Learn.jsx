@@ -186,7 +186,7 @@ function Learn(props) {
   async function updateWord(word) {
     try {
       const responseData = await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + "/users/words/word/" + word.number,
+        process.env.REACT_APP_BACKEND_URL + "/users/words/" + word.number,
         "PATCH",
         JSON.stringify({ level: word.level }),
         {

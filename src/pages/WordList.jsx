@@ -44,8 +44,7 @@ function WordList() {
 
   function setWordList(words, category) {
     let newArray = [];
-    console.log(category + " " + words.length);
-    console.log(words[1111]);
+
     if (category === "Top") {
       for (let i = 0; i < 1000; i++) newArray.push(words[i]);
     } else newArray = words.filter(word => word.categories.includes(category));

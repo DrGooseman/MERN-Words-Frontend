@@ -46,7 +46,7 @@ function LearnCard(props) {
 
   useEffect(() => {
     setIsClicked([false, false, false, false]);
-  }, [props.word]);
+  }, [props.options]);
 
   function handleClick(optionNum) {
     const newIsClicked = [...isClicked];
