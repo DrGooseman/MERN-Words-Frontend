@@ -4,8 +4,8 @@ import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import Spinner from "react-bootstrap/Spinner";
 import Alert from "react-bootstrap/Alert";
 
@@ -20,6 +20,7 @@ function Login() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [lang, setLang] = useState("");
   const [errorName, setErrorName] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorPassword, setErrorPassword] = useState("");
@@ -67,32 +68,42 @@ function Login() {
           { "Content-Type": "application/json" }
         );
 
-        //  console.log(responseData._id);
-        // console.log(responseData.token);
-        auth.login(responseData._id, responseData.token, responseData.name);
+        auth.login(
+          responseData._id,
+          responseData.token,
+          responseData.name,
+          null,
+          responseData.lang
+        );
       } catch (err) {}
     } else {
       try {
-        // const formData = new FormData();
-
-        // formData.append("email", email);
-        // formData.append("name", name);
-        // formData.append("password", password);
         const responseData = await sendRequest(
           process.env.REACT_APP_BACKEND_URL + "/users/",
           "POST",
-          //formData
+
           JSON.stringify({
             name: name,
             email: email,
-            password: password
+            password: password,
+            lang: lang
           }),
           { "Content-Type": "application/json" }
         );
 
-        auth.login(responseData._id, responseData.token, responseData.name);
+        auth.login(
+          responseData._id,
+          responseData.token,
+          responseData.name,
+          null,
+          responseData.lang
+        );
       } catch (err) {}
     }
+  }
+
+  function handleSetLang(val) {
+    setLang(val);
   }
 
   return (
@@ -116,7 +127,38 @@ function Login() {
               : "Already have an account? Login here."}
           </Button>
         </div>
+        {!isLoginMode && (
+          <div className="center-items">
+            <br />
+            <h1>{"Pick a language:"}</h1>
 
+            <ToggleButtonGroup
+              type="radio"
+              name="langs"
+              defaultValue={""}
+              onChange={handleSetLang}
+            >
+              <ToggleButton variant="outline-dark" value={"DE"}>
+                <img
+                  className="flag-icon-big"
+                  src="germanflag.png"
+                  alt="german flag"
+                />
+                <h3>German</h3>
+              </ToggleButton>
+              <ToggleButton variant="outline-dark" value={"RU"}>
+                <img
+                  className="flag-icon-big"
+                  src="russianflag.png"
+                  alt="russian flag"
+                />
+                <h3>Russian</h3>
+              </ToggleButton>
+            </ToggleButtonGroup>
+            {/* <img className="flag-icon" src="germanflag.png" alt="german flag" />
+            <h3>German</h3> */}
+          </div>
+        )}
         {!isLoginMode && (
           <Form.Group controlId="formBasicName">
             <Form.Label>Name</Form.Label>

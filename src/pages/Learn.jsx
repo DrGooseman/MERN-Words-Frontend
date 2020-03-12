@@ -16,7 +16,7 @@ import { AuthContext } from "../auth-context";
 import ProgressCard from "../components/ProgressCard";
 import LearnCard from "../components/LearnCard";
 
-const soundCorrect = new Audio("/SoundCorrect.wav");
+const soundCorrect = new Audio("SoundCorrect.wav");
 const soundIncorrect = new Audio("SoundIncorrect.wav");
 const soundWin = new Audio("SoundWin.wav");
 

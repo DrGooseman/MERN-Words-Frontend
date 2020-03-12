@@ -88,7 +88,8 @@ function WordInfo(props) {
               <BCard.Title className="word-info-level-body ">
                 <h3 className="word-info-level-body-item">{word.level}</h3>
                 <Button
-                  className="word-info-level-body-item"
+                  variant="danger"
+                  className="word-info-level-body-item-button"
                   onClick={resetWord}
                 >
                   Reset

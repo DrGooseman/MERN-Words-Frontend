@@ -8,9 +8,47 @@ import FormControl from "react-bootstrap/FormControl";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 import { AuthContext } from "../auth-context";
+import { useHttpClient } from "../hooks/http-hook";
 
 function Header() {
   const auth = useContext(AuthContext);
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  async function handleLangChange(value) {
+    // event.preventDefault();
+    console.log(value);
+    try {
+      const responseData = await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + "/users/lang",
+        "POST",
+
+        JSON.stringify({
+          lang: value
+        }),
+        { "Content-Type": "application/json", Authorization: auth.token }
+      );
+
+      auth.login(
+        responseData._id,
+        responseData.token,
+        responseData.name,
+        null,
+        responseData.lang
+      );
+    } catch (err) {}
+  }
+
+  function getIcon() {
+    console.log(auth.lang);
+    if (auth.lang === "DE")
+      return (
+        <img className="flag-icon" src="germanflag.png" alt="german flag" />
+      );
+    if (auth.lang === "RU")
+      return (
+        <img className="flag-icon" src="russianflag.png" alt="russian flag" />
+      );
+  }
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -35,6 +73,39 @@ function Header() {
             </Nav.Link>
           )}
           {auth.token && <Navbar.Brand>{auth.name}</Navbar.Brand>}
+          {auth.token && (
+            <NavDropdown
+              className="no-padding"
+              title={getIcon()}
+              id="nav-dropdown"
+            >
+              <NavDropdown.Item
+                className="no-padding"
+                eventKey="DE"
+                onClick={() => handleLangChange("DE")}
+              >
+                <img
+                  className="flag-icon"
+                  src="germanflag.png"
+                  alt="german flag"
+                />
+                German
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                className="no-padding"
+                eventKey="RU"
+                onClick={() => handleLangChange("RU")}
+              >
+                <img
+                  className="flag-icon"
+                  src="russianflag.png"
+                  alt="russian flag"
+                />
+                Russian
+              </NavDropdown.Item>
+            </NavDropdown>
+          )}
+
           {auth.token && <Nav.Link onClick={auth.logout}>Logout</Nav.Link>}
         </Nav>
       </Navbar.Collapse>

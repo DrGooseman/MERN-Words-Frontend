@@ -163,6 +163,12 @@ div.card-body {
   padding: 0;
 }
 
+.learn-card button {
+  min-width: 16rem;
+  height: 6rem;
+  margin: 1rem;
+}
+
 .word-info {
   font-size: 3rem;
   display: inline;
@@ -207,22 +213,36 @@ div.card-body {
 .word-info-level-body {
   display: flex;
   /* justify-content: space-between;
-  align-content: space-around; */
+    align-content: space-around; */
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .word-info-level-body-item {
   /* height: 2rem; */
-  margin: 0.2rem 0.3rem;
+  margin: 0.2rem 1rem auto 1rem;
+}
+.word-info-level-body-item-button {
+  margin: 0.5rem 0.12rem auto 0.12rem;
+  width: 3rem;
+  padding: 0 !important;
 }
 
-.learn-card button {
-  min-width: 16rem;
-  height: 6rem;
-  margin: 1rem;
+.flag-icon {
+  width: 2rem;
+  padding: 0.3rem 0 0 0;
+}
+.flag-icon-big {
+  width: 4rem;
+  padding: 0;
 }
 
+.dropdown-toggle.nav-link {
+  padding: 0 !important;
+}
+.no-padding {
+  padding: 0 !important;
+}
 @media (min-width: 684px) {
   .dashboard-items {
     list-style: none;
