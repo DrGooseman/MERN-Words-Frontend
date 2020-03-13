@@ -22,7 +22,7 @@ function WordList() {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [auth.lang]);
 
   async function getData() {
     try {

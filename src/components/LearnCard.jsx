@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from "react";
 import BCard from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+import WordOptions from "./WordOptions";
 
 function LearnCard(props) {
   //array that shows which button is clicked
   const [isClicked, setIsClicked] = useState([false, false, false, false]);
 
   function getHeader() {
-    return <h1>{props.word}</h1>;
+    return <h1>{props.word.word}</h1>;
   }
 
   function getSentence() {
     const slice = props.sentence.match(
-      new RegExp(` ${props.word}[ !.,]`, "i")
+      new RegExp(` ${props.word.word}[ !.,]`, "i")
     )[0];
 
     const splits = props.sentence.split(
-      new RegExp(` ${props.word}[ !.,]`, "i")
+      new RegExp(` ${props.word.word}[ !.,]`, "i")
     );
 
-    const splitMatch = slice.split(new RegExp(`${props.word}`, "i"));
+    const splitMatch = slice.split(new RegExp(`${props.word.word}`, "i"));
 
-    const keyWord = props.isAnswered ? props.word : "____";
+    const keyWord = props.isAnswered ? props.word.word : "____";
 
     return (
       <h1>
@@ -58,9 +56,17 @@ function LearnCard(props) {
   if (props.isSentence) {
     return (
       <BCard className="learn-card">
-        <BCard.Header className="text-center">
-          {getSentence()}
-          <p>{props.translatedSentence}</p>
+        <BCard.Header className="text-center  learn-card-header">
+          <div className="learn-card-word">
+            {getSentence()}
+            <p>{props.translatedSentence}</p>
+          </div>
+          <WordOptions
+            number={props.number}
+            handleMaster={props.handleMaster}
+            handleFlag={props.handleFlag}
+            isFlagged={props.word.isFlagged}
+          />
         </BCard.Header>
 
         <BCard.Body>
@@ -100,7 +106,15 @@ function LearnCard(props) {
   } else {
     return (
       <BCard className="learn-card">
-        <BCard.Header className="text-center">{getHeader()}</BCard.Header>
+        <BCard.Header className="text-center learn-card-header">
+          <div className="learn-card-word">{getHeader()}</div>
+          <WordOptions
+            number={props.number}
+            handleMaster={props.handleMaster}
+            handleFlag={props.handleFlag}
+            isFlagged={props.word.isFlagged}
+          />
+        </BCard.Header>
 
         <BCard.Body>
           <BCard.Title className="learn-card-body">

@@ -12,6 +12,7 @@ import Card from "../components/Card";
 
 import { useHttpClient } from "../hooks/http-hook";
 import { AuthContext } from "../auth-context";
+import WordOptions from "./../components/WordOptions";
 
 function WordInfo(props) {
   const auth = useContext(AuthContext);
@@ -64,8 +65,50 @@ function WordInfo(props) {
         }
       );
 
-      const updatedWord = { ...word, level: responseData.word.level };
+      const updatedWord = {
+        ...word,
+        level: responseData.word.level,
+        nextDate: responseData.word.nextDate
+      };
       setWord(updatedWord);
+    } catch (err) {}
+  }
+
+  async function handleMaster() {
+    try {
+      //  word.level = 4;
+      const responseData = await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + "/users/words/" + word.number,
+        "PATCH",
+        JSON.stringify({ level: 4 }),
+        {
+          "Content-Type": "application/json",
+          Authorization: auth.token
+        }
+      );
+      const updatedWord = {
+        ...word,
+        level: responseData.word.level,
+        nextDate: responseData.word.nextDate
+      };
+      setWord(updatedWord);
+    } catch (err) {}
+  }
+
+  async function handleFlag() {
+    try {
+      console.log(word.isFlagged);
+      word.isFlagged = !word.isFlagged;
+      console.log(word.isFlagged);
+      const responseData = await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + "/users/words/" + word.number,
+        "PATCH",
+        JSON.stringify({ isFlagged: word.isFlagged }),
+        {
+          "Content-Type": "application/json",
+          Authorization: auth.token
+        }
+      );
     } catch (err) {}
   }
 
@@ -103,7 +146,19 @@ function WordInfo(props) {
 
       {word && (
         <BCard className="word-info">
-          <BCard.Header className="text-center">{word.word}</BCard.Header>
+          <BCard.Header className="text-center  learn-card-header">
+            <div className="learn-card-word">
+              {word.word}
+              <p>{props.translatedSentence}</p>
+            </div>
+
+            <WordOptions
+              number={props.number}
+              handleMaster={handleMaster}
+              handleFlag={handleFlag}
+              isFlagged={word.isFlagged}
+            />
+          </BCard.Header>
 
           <BCard.Body>
             <BCard.Title className="word-info-body">

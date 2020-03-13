@@ -56,7 +56,7 @@ function Learn(props) {
         }
       );
       const newWords = responseData.words.map(word => ({ ...word, wins: 0 }));
-
+      console.log(newWords);
       setWords(newWords);
 
       // getQuestion();
@@ -126,10 +126,6 @@ function Learn(props) {
       const newIndex = Math.floor(Math.random() * array.length);
       array[i] = array[newIndex];
       array[newIndex] = elem;
-      // const elem = { ...array[i] };
-      // const newIndex = Math.floor(Math.random() * array.length);
-      // array[i] = { ...array[newIndex] };
-      // array[newIndex] = elem;
     }
   }
 
@@ -189,6 +185,44 @@ function Learn(props) {
         process.env.REACT_APP_BACKEND_URL + "/users/words/" + word.number,
         "PATCH",
         JSON.stringify({ level: word.level }),
+        {
+          "Content-Type": "application/json",
+          Authorization: auth.token
+        }
+      );
+    } catch (err) {}
+  }
+
+  function handleMaster(wordNum) {
+    const newWords = words.map(word => {
+      if (word.number === wordNum) {
+        word.wins = 3;
+        setAnswerState(0);
+        console.log("win");
+        word.level = 4;
+        updateWord(word);
+
+        // playSound(0);
+      }
+      return word;
+    });
+
+    setWords(newWords);
+
+    //check if done
+    getNextWord();
+  }
+
+  async function handleFlag(wordNum) {
+    try {
+      const word = words.find(word => word.number === wordNum);
+      console.log(word.isFlagged);
+      word.isFlagged = !word.isFlagged;
+      console.log(word.isFlagged);
+      const responseData = await sendRequest(
+        process.env.REACT_APP_BACKEND_URL + "/users/words/" + wordNum,
+        "PATCH",
+        JSON.stringify({ isFlagged: word.isFlagged }),
         {
           "Content-Type": "application/json",
           Authorization: auth.token
@@ -258,7 +292,8 @@ function Learn(props) {
       {currentWord && (
         // <div className="learn-card">
         <LearnCard
-          word={currentWord.word}
+          word={currentWord}
+          number={currentWord.number}
           sentence={currentWord.sentence}
           translatedSentence={currentWord.translatedSentence}
           options={currentOptions}
@@ -266,6 +301,8 @@ function Learn(props) {
           handleAnswer={handleAnswer}
           isAnswered={answerState !== 0}
           isSentence={isSentence}
+          handleMaster={handleMaster}
+          handleFlag={handleFlag}
         />
         // </div>
       )}

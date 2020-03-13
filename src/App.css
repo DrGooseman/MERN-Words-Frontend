@@ -163,10 +163,40 @@ div.card-body {
   padding: 0;
 }
 
-.learn-card button {
+.learn-card-body button {
   min-width: 16rem;
   height: 6rem;
   margin: 1rem;
+}
+
+.learn-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  align-items: center;
+  padding: 8px 18px !important;
+}
+/* .learn-card-header h1 {
+  width: calc(100% - 2rem);
+} */
+.learn-card-word {
+  width: calc(100% - 2rem);
+}
+
+.word-options {
+  /* flex-basis: 2rem; */
+  width: 2rem;
+  /* margin-left: auto; */
+}
+
+.word-options button {
+  width: 2rem;
+  height: 2rem;
+  margin: 0.4rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .word-info {
@@ -243,6 +273,7 @@ div.card-body {
 .no-padding {
   padding: 0 !important;
 }
+
 @media (min-width: 684px) {
   .dashboard-items {
     list-style: none;
