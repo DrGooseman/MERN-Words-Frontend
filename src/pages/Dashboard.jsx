@@ -23,7 +23,8 @@ function Dashboard() {
     readyToReview: 0,
     learned: 0,
     mastered: 0,
-    words: 0
+    words: 0,
+    flaggedAsDifficult: 0
   });
 
   useEffect(() => {
@@ -108,6 +109,13 @@ function Dashboard() {
             onClick={() => history.push("/learn/Curse")}
           >
             Curse Words and Insults
+          </Button>
+          <Button
+            className="dashboard-learn-button-small-text"
+            onClick={() => history.push("/learn/Flagged")}
+            disabled={!wordInfo.flaggedAsDifficult}
+          >
+            Flagged as Difficult
           </Button>
         </div>
       )}

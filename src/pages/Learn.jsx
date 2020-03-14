@@ -56,7 +56,7 @@ function Learn(props) {
         }
       );
       const newWords = responseData.words.map(word => ({ ...word, wins: 0 }));
-      console.log(newWords);
+
       setWords(newWords);
 
       // getQuestion();
@@ -72,7 +72,7 @@ function Learn(props) {
 
     rightOption.isCorrect = true;
     options.push(rightOption);
-    fillRandomOptions(options);
+    fillRandomOptions(options, rightOption);
     shuffleArray(options);
 
     setCurrentWord(rightOption);
@@ -105,7 +105,7 @@ function Learn(props) {
     finishRound();
   }
 
-  function fillRandomOptions(array) {
+  function fillRandomOptions(array, rightOption) {
     let count = 0;
     while (count < 30) {
       let randomWord = words[Math.floor(Math.random() * words.length)];
@@ -117,6 +117,14 @@ function Learn(props) {
         if (array.length === 4) return;
       }
       count++;
+    }
+    while (array.length < 4) {
+      let randomWord = words[Math.floor(Math.random() * words.length)];
+
+      if (randomWord.number === rightOption.number) randomWord.isCorrect = true;
+      else randomWord.isCorrect = false;
+
+      array.push(randomWord);
     }
   }
 
@@ -198,7 +206,7 @@ function Learn(props) {
       if (word.number === wordNum) {
         word.wins = 3;
         setAnswerState(0);
-        console.log("win");
+
         word.level = 4;
         updateWord(word);
 
@@ -216,9 +224,9 @@ function Learn(props) {
   async function handleFlag(wordNum) {
     try {
       const word = words.find(word => word.number === wordNum);
-      console.log(word.isFlagged);
+
       word.isFlagged = !word.isFlagged;
-      console.log(word.isFlagged);
+
       const responseData = await sendRequest(
         process.env.REACT_APP_BACKEND_URL + "/users/words/" + wordNum,
         "PATCH",

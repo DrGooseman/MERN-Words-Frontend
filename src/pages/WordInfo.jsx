@@ -171,8 +171,8 @@ function WordInfo(props) {
       <h1 className="center">Examples:</h1>
       {word &&
         word.sentences.length > 0 &&
-        word.sentences.map(sentence => (
-          <div className="word-info-sentence">
+        word.sentences.map((sentence, index) => (
+          <div key={index} className="word-info-sentence">
             <h4>{sentence.sentence}</h4>
             <p>{sentence.translatedSentence}</p>
           </div>

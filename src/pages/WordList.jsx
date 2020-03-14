@@ -134,6 +134,7 @@ function WordList() {
                 definition={word.definition}
                 level={word.level}
                 nextDate={word.nextDate}
+                isFlagged={word.isFlagged}
               />
             ))}
         </tbody>

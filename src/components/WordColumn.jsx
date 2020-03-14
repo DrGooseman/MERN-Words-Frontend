@@ -24,7 +24,14 @@ function WordColumn(props) {
 
   return (
     <tr onClick={() => history.push("/word/" + props.number)}>
-      <td>{props.number}</td>
+      {props.isFlagged ? (
+        <td>
+          <strong style={{ color: "red" }}>{props.number}</strong>
+        </td>
+      ) : (
+        <td>{props.number}</td>
+      )}
+
       <td>{props.word}</td>
       <td>{props.definition}</td>
       <td>{getLevel()}</td>
