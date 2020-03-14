@@ -19,6 +19,7 @@ import Learn from "./pages/Learn";
 import WordInfo from "./pages/WordInfo";
 
 import "./App.css";
+import Welcome from "./pages/Welcome";
 
 function App() {
   const { token, login, logout, _id, name, lang } = useAuth();
@@ -36,16 +37,25 @@ function App() {
         </Route>
         <Route path="/learn/:Category" exact component={Learn}></Route>
         <Route path="/word/:WordNum" exact component={WordInfo}></Route>
+        <Route path="/welcome" exact>
+          <Welcome />
+        </Route>
         <Redirect to="/" />
       </Switch>
     );
   } else {
     routes = (
       <Switch>
+        <Route path="/" exact>
+          <Login />
+        </Route>
         <Route path="/login" exact>
           <Login />
         </Route>
-        <Redirect to="/login" />
+        <Route path="/welcome" exact>
+          <Welcome />
+        </Route>
+        <Redirect to="/welcome" />
       </Switch>
     );
   }

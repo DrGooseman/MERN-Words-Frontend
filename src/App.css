@@ -12,6 +12,23 @@
   background: white; */
 }
 
+.welcome-container {
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 40rem;
+  text-align: center;
+}
+
+.welcome-question {
+  font-size: 1.6rem;
+  color: grey;
+}
+
+.footer {
+  font-size: 0.8rem;
+  color: grey;
+}
+
 .center-container-list {
   margin: 0 auto;
   width: 100%;

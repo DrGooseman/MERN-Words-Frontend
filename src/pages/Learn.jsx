@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 
@@ -23,6 +24,7 @@ const soundWin = new Audio("SoundWin.wav");
 function Learn(props) {
   const auth = useContext(AuthContext);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const history = useHistory();
 
   const [words, setWords] = useState([]);
   const [currentWord, setCurrentWord] = useState();
@@ -174,7 +176,7 @@ function Learn(props) {
 
   function handleNext() {
     if (isDone) {
-      window.location.reload();
+      newRound();
       return;
     }
     setAnswerState(0);
@@ -185,6 +187,12 @@ function Learn(props) {
   function finishRound() {
     setIsDone(true);
     playSound(2);
+  }
+
+  function newRound() {
+    setAnswerState(0);
+    setIsDone(false);
+    getData();
   }
 
   async function updateWord(word) {
@@ -256,7 +264,7 @@ function Learn(props) {
           <Alert.Heading>An error has occured :(</Alert.Heading>
           <p>{error}</p>
         </Alert>
-      )}{" "}
+      )}
       {isDone && (
         <Alert variant="success" onClose={clearError} dismissible>
           <Alert.Heading>You completed the round! Great job!</Alert.Heading>

@@ -50,8 +50,8 @@ function Header() {
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand as={NavLink} to={"/"}>
-        WordsApp
+      <Navbar.Brand as={NavLink} to={"/welcome"}>
+        TopWords
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
