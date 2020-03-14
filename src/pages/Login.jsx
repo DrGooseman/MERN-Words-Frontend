@@ -37,12 +37,14 @@ function Login() {
       else setErrorName();
     } else if (event.target.name === "email") {
       setEmail(event.target.value);
-      if (event.target.value === "") setErrorEmail("Email cannot be empty.");
+      let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!re.test(event.target.value))
+        setErrorEmail("You must enter a valid email.");
       else setErrorEmail();
     } else if (event.target.name === "password") {
       setPassword(event.target.value);
-      if (event.target.value === "")
-        setErrorPassword("Password cannot be empty.");
+      if (event.target.value.length < 6)
+        setErrorPassword("Password must be at least 6 characters long.");
       else setErrorPassword();
     }
   }
@@ -50,8 +52,10 @@ function Login() {
   useEffect(() => {
     if (errorEmail || errorPassword || (!isLoginMode && errorName))
       setIsValid(false);
+    else if (!email || !password || (!isLoginMode && (!name || !lang)))
+      setIsValid(false);
     else setIsValid(true);
-  }, [errorEmail, errorName, errorPassword, isLoginMode]);
+  }, [errorEmail, errorName, errorPassword, isLoginMode, lang]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -168,7 +172,13 @@ function Login() {
               value={name}
               onChange={handleInput}
               placeholder="Enter your name"
+              isInvalid={errorName && true}
+              isValid={!errorName && name && true}
+              // {errorName ? isInvalid : isValid}
             />
+            <Form.Control.Feedback type="invalid">
+              {errorName}
+            </Form.Control.Feedback>
           </Form.Group>
         )}
 
@@ -180,7 +190,12 @@ function Login() {
             onChange={handleInput}
             type="email"
             placeholder="Enter email"
+            isInvalid={errorEmail && true}
+            isValid={!errorEmail && email && true}
           />
+          <Form.Control.Feedback type="invalid">
+            {errorEmail}
+          </Form.Control.Feedback>
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
           </Form.Text>
@@ -194,7 +209,12 @@ function Login() {
             onChange={handleInput}
             type="password"
             placeholder="Password"
+            isInvalid={errorPassword && true}
+            isValid={!errorPassword && password && true}
           />
+          <Form.Control.Feedback type="invalid">
+            {errorPassword}
+          </Form.Control.Feedback>
         </Form.Group>
 
         <Button
