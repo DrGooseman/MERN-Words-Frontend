@@ -97,16 +97,17 @@ function Welcome() {
       <p></p>
       <br></br>
       <p>Well anyway, I hope you enjoy TopWords!</p>
-      <Button onClick={() => history.push("/")}>Get Started!</Button>
+      <Button onClick={() => history.push("/dashboard")}>Get Started!</Button>
       <br></br>
       <br></br>
       <br></br>
       <br></br>
-      <p>Questions, comments, or requests? Email me!</p>
-      <p>
-        <strong>JamesJQuinn12@gmail.com</strong>
-      </p>
+      <p>Questions, comments, or requests? Send me a message!</p>
 
+      <Button onClick={() => history.push("/contactme")}>Contact me</Button>
+
+      <br></br>
+      <br></br>
       <p className="footer">© {new Date().getFullYear()} James Quinn.</p>
     </div>
   );

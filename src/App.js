@@ -20,6 +20,7 @@ import WordInfo from "./pages/WordInfo";
 
 import "./App.css";
 import Welcome from "./pages/Welcome";
+import ContactMe from "./pages/ContactMe";
 
 function App() {
   const { token, login, logout, _id, name, lang } = useAuth();
@@ -32,6 +33,9 @@ function App() {
         <Route path="/" exact>
           <Dashboard />
         </Route>
+        <Route path="/dashboard" exact>
+          <Dashboard />
+        </Route>
         <Route path="/wordlist" exact>
           <WordList />
         </Route>
@@ -40,6 +44,9 @@ function App() {
         <Route path="/welcome" exact>
           <Welcome />
         </Route>
+        <Route path="/contactme" exact>
+          <ContactMe />
+        </Route>
         <Redirect to="/" />
       </Switch>
     );
@@ -47,13 +54,19 @@ function App() {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <Login />
+          <Welcome />
         </Route>
         <Route path="/login" exact>
           <Login />
         </Route>
+        <Route path="/dashboard" exact>
+          <Login />
+        </Route>
         <Route path="/welcome" exact>
           <Welcome />
+        </Route>
+        <Route path="/contactme" exact>
+          <ContactMe />
         </Route>
         <Redirect to="/welcome" />
       </Switch>
