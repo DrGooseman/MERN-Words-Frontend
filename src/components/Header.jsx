@@ -56,7 +56,7 @@ function Header() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link as={NavLink} to={"/"}>
+          <Nav.Link as={NavLink} to={"/dashboard"}>
             Dashboard
           </Nav.Link>
           <Nav.Link as={NavLink} to={"/wordlist"}>

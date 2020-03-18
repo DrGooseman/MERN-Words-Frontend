@@ -62,6 +62,9 @@ function App() {
         <Route path="/dashboard" exact>
           <Login />
         </Route>
+        <Route path="/wordlist" exact>
+          <Login />
+        </Route>
         <Route path="/welcome" exact>
           <Welcome />
         </Route>
